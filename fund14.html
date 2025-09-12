@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- LeadGenDAO — Fund 14 focused landing (cleaned) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LeadGenDAO - Fund 14</title>
+  <meta name="description" content="LeadGenDAO Fund 14 — expanding lead generation for the Cardano ecosystem. Read the proposal and support Fund 14." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/favicon.png" sizes="32x32" />
+
+  <style>
+    :root { --accent: #2563eb; --muted: #64748b; }
+    html,body{height:100%}
+    body{font-family:Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;color:#374151;background:#fff;-webkit-font-smoothing:antialiased}
+    .proposal-hero { background: linear-gradient(180deg, rgba(37,99,235,0.06), rgba(37,99,235,0.03)); border: 1px solid rgba(37,99,235,0.06); border-radius: 0.75rem; padding: 1.5rem; }
+    .proposal-cta { background: var(--accent); color: white; padding: .75rem 1.25rem; border-radius: .5rem; display:inline-flex; align-items:center; gap:.5rem; font-weight:600; }
+    .proposal-secondary { background: white; border:1px solid #e6edf8; padding:.5rem .9rem; border-radius:.5rem; }
+    .video-wrap{position:relative;padding-top:56.25%}
+    .video-hidden{position:absolute;inset:0;width:100%;height:100%;display:none}
+    .video-visible{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain}
+    .video-poster { position:absolute; inset:0; background-color:#000; background-position:center; background-size:cover; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+    .video-play-btn { width:88px; height:88px; border-radius:50%; background: rgba(255,255,255,0.10); display:flex; align-items:center; justify-content:center; cursor:pointer; transition: transform .14s ease; box-shadow: 0 12px 32px rgba(2,6,23,.45); border: 1px solid rgba(255,255,255,0.08); }
+    .video-play-btn:hover { transform: scale(1.04); background: rgba(255,255,255,0.14); }
+    .video-caption { margin-top:.75rem; color:#6b7280; font-size:.95rem; }
+    .logos-grid { display:grid; gap:0.75rem; grid-auto-rows: 78px; }
+    .logo-card { background:#fff; display:flex; align-items:center; justify-content:center; border-radius:.5rem; padding:.6rem; transition: box-shadow .18s, transform .18s; border:1px solid #f1f5f9; }
+    .logo-card img{max-height:48px; width:auto; display:block; object-fit:contain}
+    @media (min-width:1024px) { .logos-grid { grid-template-columns: repeat(8, minmax(0,1fr)); } }
+    @media (min-width:768px) and (max-width:1023px) { .logos-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+    @media (max-width:767px) { .logos-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    .sr-only{position: absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+  </style>
+</head>
+<body class="antialiased">
+
+<!-- Navbar (links use data-link; hrefs injected by single script) -->
+<nav class="fixed top-0 left-0 right-0 bg-white shadow z-50">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <a data-link="home" class="flex-shrink-0 nav-link" aria-label="Home">
+        <img src="./img/logo.svg" class="h-8 w-auto" alt="LeadGen Platform Logo" />
+      </a>
+
+      <div class="hidden md:flex items-center space-x-8 navbar-nav">
+        <a data-link="home" class="nav-link text-gray-700 hover:text-blue-600">Home</a>
+        <a data-link="clients" class="nav-link text-gray-700 hover:text-blue-600">Clients</a>
+        <a data-link="fund14" class="nav-link text-gray-700 hover:text-blue-600">Fund14</a>
+        <a data-link="about" class="nav-link text-gray-700 hover:text-blue-600">About Us</a>
+        <a data-link="faq" class="nav-link text-gray-700 hover:text-blue-600">FAQ</a>
+        <a data-link="contact" class="nav-link text-gray-700 hover:text-blue-600">Contact Us</a>
+        <a data-link="register" class="nav-link bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Register</a>
+      </div>
+
+      <div class="md:hidden">
+        <button id="mobile-menu-button" aria-expanded="false" class="text-gray-700 hover:text-gray-900 focus:outline-none">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden px-4 pt-4 pb-4 space-y-2 bg-white shadow-lg" aria-hidden="true">
+    <a data-link="home" class="block nav-link">Home</a>
+    <a data-link="clients" class="block nav-link">Clients</a>
+    <a data-link="fund14" class="block nav-link">Fund14</a>
+    <a data-link="about" class="block nav-link">About Us</a>
+    <a data-link="faq" class="block nav-link">FAQ</a>
+    <a data-link="contact" class="block nav-link">Contact Us</a>
+    <a data-link="register" class="block nav-link text-white bg-blue-600 px-4 py-2 rounded">Register</a>
+  </div>
+</nav>
+
+<main class="pt-20">
+  <!-- FOCUS HERO -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="flex flex-col lg:flex-row items-start gap-8">
+      <div class="w-full lg:w-2/3">
+        <div class="proposal-hero">
+          <h1 id="hero-title" class="text-3xl md:text-4xl font-bold text-gray-900">LeadGenDAO — Fund 14</h1>
+          <p class="mt-3 text-lg md:text-xl text-gray-700">“Expanding LeadGenDAO to Serve the Cardano Ecosystem”</p>
+
+          <p class="mt-4 text-gray-600">
+            Through our Fund 14 initiative, we're building a specialized database of corporate lead needs specifically for Cardano companies. Join the growing network of blockchain businesses already benefiting from our platform.</p>
+          <p class="mt-4 text-gray-600">We're applying for Catalyst Fund 14 to improve and scale the lead generation platform. Check out our proposal and consider voting if you'd like to see this project grow.</p>
+
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <!-- proposal link will be set by script using cfg.proposalURL -->
+            <a id="proposal-link" data-link="proposal" class="proposal-cta" aria-label="Read our Fund 14 proposal on Project Catalyst" role="button">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M17 8V7l-5-4H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V9z"/></svg>
+              <span>Read Our Fund 14 Proposal</span>
+            </a>
+
+            <!-- <a id="vote-link" data-link="vote" class="proposal-secondary" aria-label="How to vote (Catalyst)">How to vote (Catalyst)</a> -->
+
+            <!-- <span class="text-sm text-gray-500 ml-2">Make your vote count</span> -->
+          </div>
+
+          <!-- <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-600">
+            <li>• Specialized Cardano-focused lead database</li>
+            <li>• On-chain verifiable lead generator credentials</li>
+            <li>• Smart-contract payments for transparent payouts</li>
+            <li>• Faster ramp-up for Cardano projects seeking customers</li>
+          </ul> -->
+        </div>
+
+         <div class="mt-6 p-4 rounded-md border border-gray-100 bg-white">
+          <h3 class="text-lg font-semibold text-gray-900">Proven Results in the Cardano Space</h3>
+          <p class="mt-2 text-gray-600">We've generated high-quality leads for established Cardano companies including Socious, Palmyra, NMKR, and Andamio.</p>
+        </div>
+      </div>
+
+     <!-- <aside class="w-full lg:w-1/3 flex flex-col gap-4">
+        <div class="bg-white p-4 rounded-md border border-gray-100 flex items-center justify-center">
+          <img src="img/logo.png" alt="Fund 14 badge" class="hero-side-img max-w-full h-auto" style="max-width:320px" />
+        </div>
+
+        <div class="bg-blue-50 p-4 rounded-md">
+          <p class="font-semibold text-gray-900">Quick actions</p>
+          <div class="mt-3 flex flex-col gap-2">
+            <a id="fund11-link" data-link="fund11" class="text-blue-600 font-medium">Read Fund 11 closing report</a>
+            <a data-link="contactEmail" class="text-gray-700">Contact: benji@elksconnect.com</a>
+            <a data-link="contactEmail" class="inline-block mt-2 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Connect</a>
+          </div>
+        </div>
+      </aside> -->
+    </div>
+  </section>
+
+  <!-- Testimonial — improved player UI -->
+  <section class="container mx-auto px-4 py-8">
+    <div class="bg-gray-50 p-6 rounded-md">
+      <h3 class="text-xl font-semibold text-gray-900">Theodore’s testimonial</h3>
+      <p class="text-sm text-gray-500">Zengate Co-Founder</p>
+
+      <div class="mt-4 video-wrap" id="testimonial-video-wrap" aria-label="Testimonial video">
+        <!-- poster area (click or keyboard to play) -->
+        <div id="testimonial-poster" class="video-poster" role="button" tabindex="0" aria-label="Play testimonial video" title="Play testimonial video">
+        <div class="video-play-btn" id="testimonial-play-btn" role="button" tabindex="0" aria-hidden="false" aria-label="Play">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2v20l18-10L4 2z"/></svg>
+          </div>
+        </div>
+
+        <!-- native <video> — sources appended lazily by script -->
+        <video id="testimonial-video" class="video-hidden" playsinline preload="metadata" controls aria-hidden="true"></video>
+      </div>
+      <div class="mt-3 flex flex-col gap-2">
+            <a id="fund11-link" data-link="fund11" class="text-blue-600 font-medium">Read our Fund 11 closing report to see our track record.</a>
+            <!-- <a data-link="contactEmail" class="text-gray-700">Contact: benji@elksconnect.com</a> -->
+            <!-- <a data-link="contactEmail" class="inline-block mt-2 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Connect</a> -->
+          </div>
+    </div>
+  
+
+</section>
+<!-- Intrested to join? -->
+<section class="container mx-auto px-4 py-10">
+  <div class="max-w-3xl mx-auto bg-white border border-gray-100 rounded-lg p-6 shadow-sm">
+    <p class="text-lg text-gray-900 font-medium">
+      Interested in joining our lead generation network? 
+      <a data-link="register" class="font-semibold text-blue-600 hover:underline">Company Registration Form</a>
+    </p>
+    <p class="mt-3 text-gray-700">
+      Contact benji@elksconnect.com to book a call or ask questions about the project.
+    </p>
+    <!-- <a data-link="contactEmail" class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"> -->
+      <!-- Contact: benji@elksconnect.com -->
+    <!-- </a> -->
+  </div>
+</section>
+
+</section>
+
+
+
+<!-- Onboarded companies -->
+  <section class="container mx-auto px-4 py-8">
+    <h4 class="text-lg text-center font-semibold text-gray-900">Companies Onboarded</h4>
+    <!-- <p class="text-gray-600 mt-2">A selection of partners and clients we've supported.</p> -->
+
+    <div class="mt-4 logos-grid" aria-label="Onboarded companies">
+      
+      
+      
+        <a href="https://aiquant.ae" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+        <img src="img/logo_AIQUANT.svg" alt="AIQUANT TECHNOLOGIES" />
+        </a>
+      
+      
+      
+      <a href="https://palmyraecosystem.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/logo-palmyra.svg" alt="Palmyra" />
+      </a>
+      
+      <a href="https://socious.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/logo-socious.svg" alt="Socious" />
+      </a>
+
+      <a href="https://app.andamio.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/logo-andamio.png" alt="Andamio" />
+      </a>
+      
+      <a href="https://www.nmkr.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/logo-NMKR.svg" alt="NMKR" />
+      </a>
+      
+      <a href="https://www.plastiks.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/plastiks.png" alt="Plastiks" />
+      </a>
+      
+      <a href="https://www.meteraprotocol.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/company7.png" alt="Meteraprotocol" />
+      </a>
+      
+      
+      
+      <a href="https://wada.org" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/company8.png" alt="Wada" />
+      
+      </a>
+
+      <a href="https://www.dappcentral.net" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/Daap.png" alt="Daap Central" /> 
+      </a>     
+      
+      <a href="https://encryptus.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+      <img src="img/enc.png" alt="Encryptus" />
+        </a>
+      
+        <a href="https://digifarm.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+ 
+         <img src="img/digifarm.png" alt="DigiFarm" />
+         </a>
+         <a href="https://txpipe.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+         <img src="img/txpipet.png" alt="Txpipe" />
+          </a>
+         <a href="https://meshjs.dev" target="_blank" rel="noopener noreferrer" class="logo-card">
+          <img src="img/meshjsdev.png" alt="meshjs" />
+         </a>
+         <a href="https://www.sundialprotocol.com" target="_blank" rel="noopener noreferrer" class="logo-card">
+  
+         <img src="img/companyx.png" alt="sundialprotocol" />
+          </a>
+          
+           <a href="https://empowa.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+  
+         <img src="img/empowa.jpeg" alt="Empowa" />
+          </a>
+<!-- <a href="https://empowa.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+  
+         <img src="img/empowa.jpeg" alt="Empowa" />
+          </a> -->
+<a href="https://dripdropz.io" target="_blank" rel="noopener noreferrer" class="logo-card">
+  
+         <img src="img/drip.jpeg" alt="dripdropz" />
+          </a>
+<a href="https://www.wafflecapital.xyz" target="_blank" rel="noopener noreferrer" class="logo-card">
+  
+         <img src="img/waffle.jpeg" alt="wafflecapital" />
+          </a>
+<a href="https://trivolvetech.com" target="_blank" rel="noopener noreferrer" class="logo-card">
+  
+         <img src="img/Trivolve.jpeg" alt="Trivolve" />
+          </a>
+<a href="https://fida.finance" target="_blank" rel="noopener noreferrer" class="logo-card">
+  
+         <img src="img/fida.jpeg" alt="wafflecapital" />
+          </a>
+
+        </div>
+  </section>
+
+  <footer class="py-6 bg-blue-50 w-full">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-500">LeadGenDAO — Fund 14 • <a id="proposal-footer" data-link="proposal" class="text-blue-600">Read proposal</a></p>
+      <p class="text-gray-400 mt-2">Copyright © 2024 LeadGen Platform. All rights reserved.</p>
+    </div>
+  </footer>
+</main>
+
+<!-- single compact script (controls all link injection + mobile + video) -->
+<script>
+  (function () {
+    // single source for all external/internal URLs
+    const cfg = {
+      home: 'index.html#home',
+      clients: 'index.html#clients',
+      fund14: 'fund14.html',
+      about: 'index.html#aboutUs',
+      faq: 'index.html#faq',
+      contact: 'index.html#contact',
+      register: 'https://docs.google.com/forms/d/e/1FAIpQLSeqr8cvFGM4VY100GnAgJF42cRO0B3phWuWrr1ocEB87E69OA/viewform?usp=dialog',
+      proposal: 'https://projectcatalyst.io/funds/14/cardano-use-cases-concepts/leadgendao-business-lead-generation-for-cardano-dapps',
+      vote: '#', // add if you have a voting guide link
+      fund11: 'https://drive.google.com/file/d/11qECkNwK8w4ur7FGJhwV9YgNuTkTPo8A/view',
+      contactEmail: 'benji@elksconnect.com',
+      downloadVideo: 'vid/testamonial.MP4',
+      testimonialMP4: 'vid/testamonial.MP4',
+      testimonialWebm: 'vid/testamonial.webm',
+      poster: 'vid/poster-testamonial.jpg'
+    };
+
+    // helpers
+    const $ = (s, ctx=document) => ctx.querySelector(s);
+    const $$ = (s, ctx=document) => Array.from((ctx || document).querySelectorAll(s));
+
+    // inject hrefs for elements with data-link
+    $$('[data-link]').forEach(el => {
+      const key = el.getAttribute('data-link');
+      const url = cfg[key] || '#';
+      el.setAttribute('href', url);
+      // open external targets safely
+      if (url.startsWith('http')) el.setAttribute('target', '_blank'), el.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    // mobile menu toggle (single handler)
+    const mmBtn = $('#mobile-menu-button'), mm = $('#mobile-menu');
+    if (mmBtn && mm) mmBtn.addEventListener('click', () => {
+      const open = mmBtn.getAttribute('aria-expanded') === 'true';
+      mmBtn.setAttribute('aria-expanded', String(!open));
+      mm.classList.toggle('hidden');
+    });
+
+    // small 'active' highlight for nav links (keeps behaviour minimal)
+    const navLinks = $$('.nav-link');
+    navLinks.forEach(a => a.addEventListener('click', () => {
+      navLinks.forEach(i => i.classList.remove('active'));
+      a.classList.add('active');
+    }));
+
+    // --- testimonial player (lazy sources + poster + big-play) ---
+    const wrap = $('#testimonial-video-wrap');
+    const poster = $('#testimonial-poster');
+    const playBtn = $('#testimonial-play-btn');
+    const video = $('#testimonial-video');
+
+    if (poster) {
+      // set poster image if present
+      if (cfg.poster) poster.style.backgroundImage = `url('${cfg.poster}')`;
+      // support keyboard activation (Enter / Space)
+      const activate = (e) => {
+        if (e.type === 'keydown' && !['Enter',' ','Spacebar'].includes(e.key)) return;
+        e.preventDefault();
+        revealAndPlay();
+      };
+      poster.addEventListener('click', activate);
+      poster.addEventListener('keydown', activate);
+      playBtn.addEventListener('click', activate);
+      playBtn.addEventListener('keydown', activate);
+    }
+
+    let loaded = false;
+    function addSources() {
+      if (!video || loaded) return;
+      loaded = true;
+      if (cfg.testimonialWebm) {
+        const s = document.createElement('source'); s.src = cfg.testimonialWebm; s.type = 'video/webm'; video.appendChild(s);
+      }
+      const s2 = document.createElement('source'); s2.src = cfg.testimonialMP4; s2.type = 'video/mp4'; video.appendChild(s2);
+      try { video.load(); } catch (e) {}
+    }
+
+    function revealAndPlay() {
+      addSources();
+      if (!video) return;
+      video.classList.remove('video-hidden'); video.classList.add('video-visible');
+      video.setAttribute('aria-hidden','false');
+      video.controls = true;
+      if (poster) poster.style.display = 'none';
+      if (playBtn) playBtn.style.display = 'none';
+      const p = video.play();
+      if (p && typeof p.then === 'function') p.catch(()=>{});
+    }
+
+    // lazy-load when near viewport (no autoplay)
+    if (wrap && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(en => { if (en.isIntersecting) { addSources(); obs.disconnect(); }});
+      }, { rootMargin: '300px' });
+      io.observe(wrap);
+    } else {
+      setTimeout(addSources, 700);
+    }
+
+    // re-show poster on ended so users can replay via poster
+    if (video) {
+      video.addEventListener('ended', () => {
+        if (poster) poster.style.display = '';
+        if (playBtn) playBtn.style.display = '';
+        video.classList.remove('video-visible'); video.classList.add('video-hidden');
+        video.setAttribute('aria-hidden','true');
+      });
+    }
+  })();
+</script>
+</body>
+</html>
